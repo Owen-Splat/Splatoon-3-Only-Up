@@ -1,0 +1,56 @@
+Basic:
+  - DObj_MinigameChairBlue
+  - DObj_Minigame
+  - DObj_TutorialGiftBox
+  - Lft_MsnEdge15x20x3Fence
+
+  - DObj_MinigameChairBlue
+  - DObj_Minigame
+  - DObj_TutorialGiftBox
+  - Lft_MsnEdge15x20x3Fence
+
+  - DObj_MinigameChairBlue
+  - DObj_Minigame
+  - DObj_TutorialGiftBox
+  - Lft_MsnEdge15x20x3Fence
+
+  - DObj_MinigameChairBlue
+  - DObj_Minigame
+  - DObj_TutorialGiftBox
+  - Lft_MsnEdge15x20x3Fence
+
+  - DObj_MinigameChairBlue
+  - DObj_Minigame
+  - DObj_TutorialGiftBox
+  - Lft_MsnEdge15x20x3Fence
+
+  - DObj_MinigameChairBlue
+  - DObj_Minigame
+  - DObj_TutorialGiftBox
+  - Lft_MsnEdge15x20x3Fence
+
+  - Lft_MsnOctagonFloor60x15x60AP
+  - Lft_GeneralCube15x15x15AP
+  - Lft_GeneralCube30x15x15AP
+  - Lft_GeneralCube30x15x30AP
+  - Lft_GeneralCube30x15x45AP
+  - Lft_GeneralCube30x30x15AP
+  - Lft_GeneralCube30x30x30AP
+  - Lft_GeneralCube30x30x45AP
+  # - Lft_GeneralCube30x30x80AP
+  - Lft_GeneralCube30x45x15AP
+  - Lft_GeneralCube30x45x30AP
+  - Lft_GeneralCube40x30x15AP
+  - Lft_GeneralCube45x15x15AP
+  # - Lft_GeneralCube60x60x15AP
+  - Lft_MsnCylinder15x15x15AP
+  - Lft_MsnCube20x25x20AP
+  - Lft_MsnCube30x30x30AP
+  - Lft_MsnCube40x40x40AP
+  - Lft_MsnCube60x60x60AP
+  # - Lft_MsnFloor30x15x180AP
+  # - Lft_MsnOctagonPiller120x180x120AP
+  - Lft_MsnOctagonPiller30x30x30AP
+  - Lft_MsnOctagonPiller30x90x30AP
+  # - Lft_MsnOctagonPiller60x180x60AP
+  - Lft_MsnOctagonPiller60x60x60AP
