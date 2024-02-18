@@ -23,14 +23,21 @@ def createMap(actors, objects):
         if i == num-1:
             obj_name = "Lft_MsnGoalFloor180x30x90AP"
         else:
-            obj_name = random.choice(objects)
+            if not (i+1) % 50:
+                obj_name = "MissionCheckPoint"
+            else:
+                obj_name = random.choice(objects)
         
         new_object = SplatObject(obj_name, ids)
         new_object.bakeable = True
+        if not (i+1) % 50:
+            new_object.progress = int((i+1) / 50)
+            if new_object.progress == (round(num / 50)) - 1:
+                new_object.is_last = True
 
         if new_object.nextX != 0.0:
             pos[0] += (new_object.nextX / 2)
-            # pos[1] -= new_object.nextY
+            pos[1] -= new_object.nextY
             pos[2] += (new_object.nextZ / 2)
         
         new_object.translate = pos
@@ -53,7 +60,7 @@ def createMap(actors, objects):
             hor = -abs(hor)
         pos[0] += hor
 
-        pos[1] += random.uniform(0.05, 0.2) # + new_object.nextY
+        pos[1] += random.uniform(0.05, 0.2) + new_object.nextY
 
         hor = random.uniform(2.0, 3.0) + new_object.nextZ
         pos[2] += abs(hor)
@@ -71,7 +78,7 @@ def createMap(actors, objects):
 
     gate_obj = SplatObject("Lft_MsnGoalGateNP", ids)
     gate_obj.bakeable = True
-    pos[2] += 20.0
+    pos[2] += 15.0
     gate_obj.translate = pos
     gate_obj.rotation = rot
     actors.append(gate_obj.pack())

@@ -8,7 +8,12 @@ class SplatObject:
         self.rotation = []
         self.scale = []
         self.bakeable = False
-        
+
+        # only used for checkpoints
+        self.progress = 0
+        self.is_last = False
+
+        # create unique IDs for the object
         hash = ids['Hash'][-1]
         while hash in ids['Hash']:
             hash = random.getrandbits(64)
@@ -37,6 +42,12 @@ class SplatObject:
             self.nextX = float(dims[n-3][-2:]) / 10 / 1.5
             self.nextY = float(dims[n-2]) / 10 / 3.0
             self.nextZ = float(dims[n-1]) / 10 / 1.2
+        if name.endswith('Fence'):
+            dims = name.strip('Fence').split('x')
+            n = len(dims)
+            self.nextX = float(dims[n-3][-2:]) / 10 / 1.5
+            self.nextY = float(dims[n-2]) / 10 / 2.5
+            self.nextZ = float(dims[n-1]) / 10 / 1.2
     
 
     def pack(self):
@@ -59,4 +70,7 @@ class SplatObject:
         objd['TeamCmp'] = {'Team': 'Neutral'}
         objd['Translate'] = oead.byml.Array([oead.F32(t) for t in self.translate])
 
+        if self.name == "MissionCheckPoint":
+            objd['spl__MissionCheckPointBancParam'] = {"Progress": oead.S32(self.progress), "IsLast": self.is_last}
+        
         return objd
