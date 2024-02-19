@@ -3,39 +3,9 @@ Basic:
   - DObj_Minigame
   - DObj_TutorialGiftBox
   - Lft_MsnEdge15x20x3Fence
-
-  - DObj_MinigameChairBlue
-  - DObj_Minigame
-  - DObj_TutorialGiftBox
-  - Lft_MsnEdge15x20x3Fence
-
-  - DObj_MinigameChairBlue
-  - DObj_Minigame
-  - DObj_TutorialGiftBox
-  - Lft_MsnEdge15x20x3Fence
-
-  - DObj_MinigameChairBlue
-  - DObj_Minigame
-  - DObj_TutorialGiftBox
-  - Lft_MsnEdge15x20x3Fence
-
-  - DObj_MinigameChairBlue
-  - DObj_Minigame
-  - DObj_TutorialGiftBox
-  - Lft_MsnEdge15x20x3Fence
-
-  - DObj_MinigameChairBlue
-  - DObj_Minigame
-  - DObj_TutorialGiftBox
-  - Lft_MsnEdge15x20x3Fence
-
   - DashPanel30
   - Geyser
   # - JumpPanel
-  # - JumpPanel
-  # - JumpPanel
-  # - JumpPanel
-
   - Lft_MsnOctagonFloor60x15x60AP
   - Lft_GeneralCube15x15x15AP
   - Lft_GeneralCube30x15x15AP
@@ -44,33 +14,31 @@ Basic:
   - Lft_GeneralCube30x30x15AP
   - Lft_GeneralCube30x30x30AP
   - Lft_GeneralCube30x30x45AP
-  # - Lft_GeneralCube30x30x80AP
   - Lft_GeneralCube30x45x15AP
   - Lft_GeneralCube30x45x30AP
   - Lft_GeneralCube40x30x15AP
   - Lft_GeneralCube45x15x15AP
-  # - Lft_GeneralCube60x60x15AP
   - Lft_MsnCylinder15x15x15AP
   - Lft_MsnCube20x25x20AP
   - Lft_MsnCube30x30x30AP
   - Lft_MsnCube40x40x40AP
   - Lft_MsnCube60x60x60AP
-  # - Lft_MsnFloor30x15x180AP
-  # - Lft_MsnOctagonPiller120x180x120AP
   - Lft_MsnOctagonPiller30x30x30AP
   - Lft_MsnOctagonPiller30x90x30AP
-  # - Lft_MsnOctagonPiller60x180x60AP
   - Lft_MsnOctagonPiller60x60x60AP
-
-  # - Lft_MsnCube105x15x3Fence
   - Lft_MsnCube15x15x3Fence
-  # - Lft_MsnCube165x15x3Fence
   - Lft_MsnCube45x15x3Fence
-  # - Lft_MsnCube75x15x3Fence
-  # - Lft_MsnEdge105x20x3Fence
-  # - Lft_MsnEdge165x20x3Fence
   - Lft_MsnEdge45x20x3Fence
   - Lft_MsnEdge75x20x3Fence
-
+  - Lft_MsnFloor60x3x30Fence
+  - Lft_MsnFloor60x5x40Fence
+  - Lft_MsnFloor90x3x30Fence
   - Lft_Obj_VendingMachine
-  # - Obj_RespawnPos
+  - Obj_RespawnPos
+  - Lft_AsariSlope10
+  - Lft_MsnPedestal60x20x60AP
+  - Lft_MsnPedestal60x5x60AP
+  - SwitchStep
+  - Sponge
+  - SpongeTall
+  - Blowouts

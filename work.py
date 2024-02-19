@@ -13,8 +13,10 @@ def createMap(actors, objects):
         ids['Hash'].append(act['Hash'])
         ids['SRTHash'].append(act['SRTHash'])
         ids['InstanceID'].append(act['InstanceID'])
+        trans = list(act['Translate'])
+        act['Translate'] = oead.byml.Array([trans[0], trans[1], oead.F32(float(trans[2]) - 500.0)])
     
-    pos = [0.0, 31.5, -84.0]
+    pos = [0.0, 31.5, -584.0]
     rot = [0.0, 0.0, 0.0]
 
     num = 200
@@ -38,7 +40,7 @@ def createMap(actors, objects):
             pos[1] -= new_object.nextY
             pos[2] += (new_object.nextZ / 2)
         
-        if obj_name == "Lft_Obj_VendingMachine":
+        if obj_name in ("Lft_Obj_VendingMachine", "Lft_MsnSlope150x60x30AP", "Lft_MsnSlope60x60x150AP", "Lft_MsnSlope90x60x150AP"):
             rot[1] = 135.0
         
         new_object.translate = pos

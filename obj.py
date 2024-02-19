@@ -1,6 +1,8 @@
 import oead, random, secrets
 
 
+# extremely messy code for tweaking lots of different object distance + height
+# will clean it up eventually
 class SplatObject:
     def __init__(self, name, ids):
         self.name = name
@@ -53,21 +55,48 @@ class SplatObject:
             self.nextX = float(dims[n-3][-2:]) / 10 / 2.0
             self.nextY = float(dims[n-2]) / 10 / 2.35
             self.nextZ = float(dims[n-1]) / 10 / 2.0
+        elif "TriangleFloor" in name:
+            dims = name.strip("Lft_MsnTriangleFloor").split('x')
+            n = len(dims)
+            self.nextX = float(dims[n-3][-2:]) / 10 / 1.5
+            self.nextY = float(dims[n-2]) / 10 / 3.0
+            self.nextZ = float(dims[n-1]) / 10 / 1.2
         elif name == "DashPanel30":
             self.nextX = -1.0
             self.nextY = -5.0
-            self.nextZ = 19.5
+            self.nextZ = 19.45
         elif name == "Geyser":
             self.nextY = random.uniform(3.0, 15.0)
         elif name == "Lft_Obj_VendingMachine":
             self.nextX = 1.0
-            self.nextY = 2.0
+            self.nextY = 2.15
             self.nextZ = 1.0
+        elif name == "SwitchStep":
+            self.nextX = 1.0
+            self.nextZ = 1.0
+        elif name == "MissionCheckPoint":
+            self.nextX = 2.0
+            self.nextZ = 2.0
         elif name == "Obj_RespawnPos":
             self.team = "Alpha"
+            self.nextX = 4.0
+            self.nextZ = 4.0
         elif name == "JumpPanel":
             self.scale = [0.5, 0.5, 0.5]
             self.nextY = 5.0
+        elif name == "Lft_AsariSlope10":
+            self.nextX = 2.0
+            self.nextZ = 2.0
+        elif name == "Sponge":
+            self.nextX = 4.0
+            self.nextY = 2.0
+            self.nextZ = 4.0
+        elif name == "SpongeTall":
+            self.nextX = 4.0
+            self.nextY = 4.0
+            self.nextZ = 4.0
+        elif name == "Blowouts":
+            self.nextZ = random.uniform(3.0, 15.0)
     
 
     def pack(self):
@@ -94,5 +123,7 @@ class SplatObject:
             objd['spl__MissionCheckPointBancParam'] = {"Progress": oead.S32(self.progress), "IsLast": self.is_last}
         elif self.name == "Geyser":
             objd['spl__GeyserBancParam'] = {'MaxHeight': oead.F32(self.nextY)}
+        elif self.name == "Blowouts":
+            objd['spl__BlowoutsBancParam'] = {'MaxLength': oead.F32(self.nextZ)}
         
         return objd
