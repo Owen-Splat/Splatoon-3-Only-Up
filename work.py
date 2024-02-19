@@ -2,26 +2,20 @@ from obj import SplatObject
 import random, oead
 
 
-def createMap(actors, objects):
+def createMap(objects):
     ids = {
         'Hash': [],
         'SRTHash': [],
         'InstanceID': []
     }
-
-    for act in actors:
-        ids['Hash'].append(act['Hash'])
-        ids['SRTHash'].append(act['SRTHash'])
-        ids['InstanceID'].append(act['InstanceID'])
-        trans = list(act['Translate'])
-        act['Translate'] = oead.byml.Array([trans[0], trans[1], oead.F32(float(trans[2]) - 500.0)])
-    
-    pos = [0.0, 31.5, -584.0]
-    rot = [0.0, 0.0, 0.0]
+    actors = []
+    pos = [0.0, 30.0, -600.0]
 
     num = 200
     for i in range(num):
-        if i == num-1:
+        if i == 0:
+            obj_name = "Obj_RespawnPos"
+        elif i == num-1:
             obj_name = "Lft_MsnGoalFloor180x30x90AP"
         else:
             if not (i+1) % 50:
@@ -41,16 +35,14 @@ def createMap(actors, objects):
             pos[2] += (new_object.nextZ / 2)
         
         if obj_name in ("Lft_Obj_VendingMachine", "Lft_MsnSlope150x60x30AP", "Lft_MsnSlope60x60x150AP", "Lft_MsnSlope90x60x150AP"):
-            rot[1] = 135.0
+            new_object.rotation[1] = 135.0
         
         new_object.translate = pos
-        new_object.rotation = rot
 
         if i == num-1:
             pos[2] += 7.5
-            rot[1] = 67.5
+            new_object.rotation[1] = 67.5
             new_object.translate = pos
-            new_object.rotation = rot
             actors.append(new_object.pack())
             break
         
@@ -70,21 +62,29 @@ def createMap(actors, objects):
             pos[2] += abs(hor)
         else:
             pos[2] += new_object.nextZ
-
-        rot[1] = 0.0 # random.uniform(0.1, 360.0)
     
-    goals = ["Obj_GoalMission", "Obj_GoalMissionAlterna"]
+    # add a random goal at the end
+    goals = ["Obj_GoalMission", "Obj_GoalMissionAlterna",
+             "SplMissionStageTreasureA", "SplMissionStageTreasureB", "SplMissionStageTreasureC"]
     goal_name = random.choice(goals)
     goal_obj = SplatObject(goal_name, ids)
+    if goal_name.startswith("Spl"):
+        pos[1] += 2.0
     pos[2] += 5.0
     goal_obj.translate = pos
-    rot[1] = 135.0
-    goal_obj.rotation = rot
+    goal_obj.rotation[1] = 135.0
     actors.append(goal_obj.pack())
 
+    # add a gate at the end for decoration
     gate_obj = SplatObject("Lft_MsnGoalGateNP", ids)
     gate_obj.bakeable = True
     pos[2] += 15.0
     gate_obj.translate = pos
-    gate_obj.rotation = rot
+    gate_obj.rotation[1] = 135.0
     actors.append(gate_obj.pack())
+
+    # the last Obj_RespawnPos in the actor list is the one that spawns the player, so move first actor to last
+    spawn_obj = actors.pop(0)
+    actors.append(spawn_obj)
+
+    return oead.byml.Array(actors)

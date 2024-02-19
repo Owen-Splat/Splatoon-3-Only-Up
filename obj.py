@@ -7,7 +7,7 @@ class SplatObject:
     def __init__(self, name, ids):
         self.name = name
         self.translate = []
-        self.rotation = []
+        self.rotation = [0.0, 0.0, 0.0]
         self.scale = [10.0, 10.0, 10.0]
         self.team = "Neutral"
 
@@ -21,19 +21,19 @@ class SplatObject:
         self.is_last = False
 
         # create unique IDs for the object
-        hash = ids['Hash'][-1]
+        hash = random.getrandbits(64)
         while hash in ids['Hash']:
             hash = random.getrandbits(64)
         ids['Hash'].append(hash)
         self.hash = hash
 
-        srt_hash = ids['SRTHash'][-1]
+        srt_hash = random.getrandbits(32)
         while srt_hash in ids['SRTHash']:
             srt_hash = random.getrandbits(32)
         ids['SRTHash'].append(srt_hash)
         self.srt_hash = srt_hash
 
-        instance_id = ids['InstanceID'][-1]
+        instance_id = secrets.token_hex(16)
         while instance_id in ids['InstanceID']:
             instance_id = secrets.token_hex(16)
         ids['InstanceID'].append(instance_id)
@@ -89,14 +89,17 @@ class SplatObject:
             self.nextZ = 2.0
         elif name == "Sponge":
             self.nextX = 4.0
-            self.nextY = 2.0
+            self.nextY = 4.0
             self.nextZ = 4.0
         elif name == "SpongeTall":
             self.nextX = 4.0
-            self.nextY = 4.0
+            self.nextY = 8.0
             self.nextZ = 4.0
         elif name == "Blowouts":
             self.nextZ = random.uniform(3.0, 15.0)
+        else:
+            self.nextX = 0.35
+            self.nextZ = 0.35
     
 
     def pack(self):
@@ -113,7 +116,8 @@ class SplatObject:
         objd['Name'] = self.name
         objd['SRTHash'] = oead.U32(self.srt_hash)
         objd['Phive'] = {'Placement': {'ID': oead.U64(self.hash)}}
-        objd['Rotate'] = oead.byml.Array([oead.F32(r) for r in self.rotation])
+        if self.rotation != [0.0, 0.0, 0.0]:
+            objd['Rotate'] = oead.byml.Array([oead.F32(r) for r in self.rotation])
         if self.scale != [10.0, 10.0, 10.0]:
             objd['Scale'] = oead.byml.Array([oead.F32(s) for s in self.scale])
         objd['TeamCmp'] = {'Team': self.team}
