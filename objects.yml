@@ -29,6 +29,13 @@ Basic:
   - DObj_TutorialGiftBox
   - Lft_MsnEdge15x20x3Fence
 
+  - DashPanel30
+  - Geyser
+  # - JumpPanel
+  # - JumpPanel
+  # - JumpPanel
+  # - JumpPanel
+
   - Lft_MsnOctagonFloor60x15x60AP
   - Lft_GeneralCube15x15x15AP
   - Lft_GeneralCube30x15x15AP
@@ -54,3 +61,16 @@ Basic:
   - Lft_MsnOctagonPiller30x90x30AP
   # - Lft_MsnOctagonPiller60x180x60AP
   - Lft_MsnOctagonPiller60x60x60AP
+
+  # - Lft_MsnCube105x15x3Fence
+  - Lft_MsnCube15x15x3Fence
+  # - Lft_MsnCube165x15x3Fence
+  - Lft_MsnCube45x15x3Fence
+  # - Lft_MsnCube75x15x3Fence
+  # - Lft_MsnEdge105x20x3Fence
+  # - Lft_MsnEdge165x20x3Fence
+  - Lft_MsnEdge45x20x3Fence
+  - Lft_MsnEdge75x20x3Fence
+
+  - Lft_Obj_VendingMachine
+  # - Obj_RespawnPos

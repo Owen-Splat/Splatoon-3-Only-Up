@@ -6,8 +6,13 @@ class SplatObject:
         self.name = name
         self.translate = []
         self.rotation = []
-        self.scale = []
-        self.bakeable = False
+        self.scale = [10.0, 10.0, 10.0]
+        self.team = "Neutral"
+
+        if name not in ("DashPanel30", "Geyser", "JumpPanel"):
+            self.bakeable = True
+        else:
+            self.bakeable = False
 
         # only used for checkpoints
         self.progress = 0
@@ -42,12 +47,27 @@ class SplatObject:
             self.nextX = float(dims[n-3][-2:]) / 10 / 1.5
             self.nextY = float(dims[n-2]) / 10 / 3.0
             self.nextZ = float(dims[n-1]) / 10 / 1.2
-        if name.endswith('Fence'):
+        elif name.endswith('Fence'):
             dims = name.strip('Fence').split('x')
             n = len(dims)
-            self.nextX = float(dims[n-3][-2:]) / 10 / 1.5
-            self.nextY = float(dims[n-2]) / 10 / 2.5
-            self.nextZ = float(dims[n-1]) / 10 / 1.2
+            self.nextX = float(dims[n-3][-2:]) / 10 / 2.0
+            self.nextY = float(dims[n-2]) / 10 / 2.35
+            self.nextZ = float(dims[n-1]) / 10 / 2.0
+        elif name == "DashPanel30":
+            self.nextX = -1.0
+            self.nextY = -5.0
+            self.nextZ = 19.5
+        elif name == "Geyser":
+            self.nextY = random.uniform(3.0, 15.0)
+        elif name == "Lft_Obj_VendingMachine":
+            self.nextX = 1.0
+            self.nextY = 2.0
+            self.nextZ = 1.0
+        elif name == "Obj_RespawnPos":
+            self.team = "Alpha"
+        elif name == "JumpPanel":
+            self.scale = [0.5, 0.5, 0.5]
+            self.nextY = 5.0
     
 
     def pack(self):
@@ -67,10 +87,12 @@ class SplatObject:
         objd['Rotate'] = oead.byml.Array([oead.F32(r) for r in self.rotation])
         if self.scale != [10.0, 10.0, 10.0]:
             objd['Scale'] = oead.byml.Array([oead.F32(s) for s in self.scale])
-        objd['TeamCmp'] = {'Team': 'Neutral'}
+        objd['TeamCmp'] = {'Team': self.team}
         objd['Translate'] = oead.byml.Array([oead.F32(t) for t in self.translate])
 
         if self.name == "MissionCheckPoint":
             objd['spl__MissionCheckPointBancParam'] = {"Progress": oead.S32(self.progress), "IsLast": self.is_last}
+        elif self.name == "Geyser":
+            objd['spl__GeyserBancParam'] = {'MaxHeight': oead.F32(self.nextY)}
         
         return objd
