@@ -1,5 +1,7 @@
 import oead, random, secrets
 
+from .data import OBJECT_INFO
+
 
 # extremely messy code for tweaking lots of different object distance + height
 # will clean it up eventually
@@ -8,7 +10,7 @@ class SplatObject:
         self.name = name
         self.translate = []
         self.rotation = [0.0, 0.0, 0.0]
-        self.scale = [10.0, 10.0, 10.0]
+        self.scale = [1.0, 1.0, 1.0]
         self.team = "Neutral"
 
         if name not in ("DashPanel30", "Geyser", "JumpPanel"):
@@ -55,53 +57,24 @@ class SplatObject:
             self.nextX = float(dims[n-3][-2:]) / 10 / 2.0
             self.nextY = float(dims[n-2]) / 10 / 2.35
             self.nextZ = float(dims[n-1]) / 10 / 2.0
-        elif "TriangleFloor" in name:
-            dims = name.strip("Lft_MsnTriangleFloor").split('x')
-            n = len(dims)
-            self.nextX = float(dims[n-3][-2:]) / 10 / 1.5
-            self.nextY = float(dims[n-2]) / 10 / 3.0
-            self.nextZ = float(dims[n-1]) / 10 / 1.2
-        elif name == "DashPanel30":
-            self.nextX = -1.0
-            self.nextY = -5.0
-            self.nextZ = 19.45
         elif name == "Geyser":
-            # self.nextX = 2.0
             self.nextY = random.uniform(3.0, 12.0)
-            # self.nextZ = 2.0
-        elif name == "Lft_Obj_VendingMachine":
-            self.nextX = 1.0
-            self.nextY = 2.10
-            self.nextZ = 1.0
-            self.rotation[1] = 180.0
-        elif name == "SwitchStep":
-            self.nextX = 1.0
-            self.nextZ = 1.0
-        elif name == "MissionCheckPoint":
-            self.nextX = 2.0
-            self.nextZ = 2.0
-        elif name == "Obj_RespawnPos":
-            self.team = "Alpha"
-            self.nextX = 4.0
-            self.nextZ = 4.0
-        elif name == "JumpPanel":
-            self.scale = [0.5, 0.5, 0.5]
-            self.nextY = 5.0
-        elif name == "Lft_AsariSlope10":
-            self.nextX = 1.5
-            self.nextZ = 1.5
-        elif name == "Sponge":
-            self.scale = [0.5, 0.5, 0.5]
-            self.nextX = 4.0
-            self.nextY = 4.0 / 2.0
-            self.nextZ = 4.0
-        elif name == "SpongeTall":
-            self.scale = [0.5, 0.5, 0.5]
-            self.nextX = 4.0
-            self.nextY = 8.0 / 2.0
-            self.nextZ = 4.0
         elif name == "Blowouts":
             self.nextZ = random.uniform(5.0, 12.0)
+        elif name in OBJECT_INFO:
+            if "x" in OBJECT_INFO[name]:
+                self.nextX = OBJECT_INFO[name]['x']
+            if "y" in OBJECT_INFO[name]:
+                self.nextY = OBJECT_INFO[name]['y']
+            if "z" in OBJECT_INFO[name]:
+                self.nextZ = OBJECT_INFO[name]['z']
+            if "rot" in OBJECT_INFO[name]:
+                self.rotation[1] = OBJECT_INFO[name]['rot']
+            if "scale" in OBJECT_INFO[name]:
+                s = OBJECT_INFO[name]['scale']
+                self.scale = [s, s, s]
+            if "team" in OBJECT_INFO[name]:
+                self.team = OBJECT_INFO[name]['team']
         else:
             self.nextX = 0.2
             self.nextZ = 0.2
@@ -123,7 +96,7 @@ class SplatObject:
         objd['Phive'] = {'Placement': {'ID': oead.U64(self.hash)}}
         if self.rotation != [0.0, 0.0, 0.0]:
             objd['Rotate'] = oead.byml.Array([oead.F32(r * 3.141592 / 180) for r in self.rotation])
-        if self.scale != [10.0, 10.0, 10.0]:
+        if self.scale != [1.0, 1.0, 1.0]:
             objd['Scale'] = oead.byml.Array([oead.F32(s) for s in self.scale])
         objd['TeamCmp'] = {'Team': self.team}
         objd['Translate'] = oead.byml.Array([oead.F32(t) for t in self.translate])

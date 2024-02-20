@@ -1,8 +1,9 @@
 from obj import SplatObject
+from data import *
 import random, oead
 
 
-def createMap(objects):
+def createMap():
     ids = {
         'Hash': [],
         'SRTHash': [],
@@ -21,7 +22,7 @@ def createMap(objects):
             if not (i+1) % 50:
                 obj_name = "MissionCheckPoint"
             else:
-                obj_name = random.choice(objects)
+                obj_name = random.choice(ALL_OBJECTS)
         
         new_object = SplatObject(obj_name, ids)
         if not (i+1) % 50:
