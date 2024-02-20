@@ -1,6 +1,5 @@
 SKIES = [
   "Sky_Space02",
-  "Sky_Cirrus00",
   "Sky_Cloudy00"
 ]
 

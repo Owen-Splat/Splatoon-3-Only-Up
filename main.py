@@ -1,13 +1,11 @@
 from zs_tools import *
 from data import *
 import work
-import random
+import random, os
 
-level_path = "C:\\Users\\Owen3\\Desktop\\Splatoon 3 Romfs\\Splatoon 3 v983040 (0100C2500FC20800) (UPD)\\Pack\\Scene"
-levels = ["Msn_A01_01"]
-
+levels = [f for f in os.listdir("output") if f.endswith(".pack.zs")]
 for level in levels:
-    with open(f"{level_path}\\{level}.pack.zs", "rb") as f:
+    with open(f"output/{level}", "rb") as f:
         zs_data = SARC(f.read())
 
     # create map
@@ -42,6 +40,6 @@ for level in levels:
     for file in water_files:
         del zs_data.writer.files[file]
     
-    # final
-    with open(f"output\\{level}.pack.zs", "wb") as f:
+    # overwrite file with new data
+    with open(f"output/{level}", "wb") as f:
         f.write(zs_data.repack())
