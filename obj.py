@@ -66,7 +66,9 @@ class SplatObject:
             self.nextY = -5.0
             self.nextZ = 19.45
         elif name == "Geyser":
-            self.nextY = random.uniform(3.0, 15.0)
+            self.nextX = 2.0
+            self.nextY = random.uniform(3.0, 10.0) / 2.0
+            self.nextZ = 2.0
         elif name == "Lft_Obj_VendingMachine":
             self.nextX = 1.0
             self.nextY = 2.15
@@ -85,8 +87,8 @@ class SplatObject:
             self.scale = [0.5, 0.5, 0.5]
             self.nextY = 5.0
         elif name == "Lft_AsariSlope10":
-            self.nextX = 2.0
-            self.nextZ = 2.0
+            self.nextX = 1.5
+            self.nextZ = 1.5
         elif name == "Sponge":
             self.nextX = 4.0
             self.nextY = 4.0
@@ -96,7 +98,8 @@ class SplatObject:
             self.nextY = 8.0
             self.nextZ = 4.0
         elif name == "Blowouts":
-            self.nextZ = random.uniform(3.0, 15.0)
+            self.nextX = 0.5
+            self.nextZ = random.uniform(2.0, 8.0)
         else:
             self.nextX = 0.35
             self.nextZ = 0.35
@@ -126,8 +129,8 @@ class SplatObject:
         if self.name == "MissionCheckPoint":
             objd['spl__MissionCheckPointBancParam'] = {"Progress": oead.S32(self.progress), "IsLast": self.is_last}
         elif self.name == "Geyser":
-            objd['spl__GeyserBancParam'] = {'MaxHeight': oead.F32(self.nextY)}
+            objd['spl__GeyserBancParam'] = {'MaxHeight': oead.F32(self.nextY * 2.0)}
         elif self.name == "Blowouts":
-            objd['spl__BlowoutsBancParam'] = {'MaxLength': oead.F32(self.nextZ)}
+            objd['spl__BlowoutsBancParam'] = {'MaxLength': oead.F32((self.nextZ))}
         
         return objd

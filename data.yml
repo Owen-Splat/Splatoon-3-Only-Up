@@ -1,11 +1,28 @@
-Basic:
+Skies:
+  - Sky_MisCrater00
+  - Sky_MisCrater01
+  - Sky_MisCrater02
+  - Sky_MisWorld
+  - Sky_MsnBrutalism00
+  - Sky_MsnBrutalism01
+  - Sky_MsnBrutalism02
+  - Sky_MsnNostalgia00
+  - Sky_MsnMegalopolis00
+  - Sky_MsnMegalopolis02
+  - Sky_MsnMegalopolis03
+  - Sky_MsnSunlight00
+  - Sky_Space02
+  - Sky_Cirrus00
+  - Sky_Cloudy00
+
+Basic_Objects:
   - DObj_MinigameChairBlue
   - DObj_Minigame
   - DObj_TutorialGiftBox
   - Lft_MsnEdge15x20x3Fence
   - DashPanel30
   - Geyser
-  # - JumpPanel
+  - JumpPanel
   - Lft_MsnOctagonFloor60x15x60AP
   - Lft_GeneralCube15x15x15AP
   - Lft_GeneralCube30x15x15AP
