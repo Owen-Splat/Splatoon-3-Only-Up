@@ -34,14 +34,11 @@ def createMap(objects):
             pos[1] -= new_object.nextY
             pos[2] += (new_object.nextZ / 2)
         
-        if obj_name in ("Lft_Obj_VendingMachine", "Lft_MsnSlope150x60x30AP", "Lft_MsnSlope60x60x150AP", "Lft_MsnSlope90x60x150AP"):
-            new_object.rotation[1] = 135.0
-        
         new_object.translate = pos
 
         if i == num-1:
             pos[2] += 7.5
-            new_object.rotation[1] = 67.5
+            new_object.rotation[1] = 90.0
             new_object.translate = pos
             actors.append(new_object.pack())
             break
@@ -72,7 +69,7 @@ def createMap(objects):
         pos[1] += 2.0
     pos[2] += 5.0
     goal_obj.translate = pos
-    goal_obj.rotation[1] = 135.0
+    goal_obj.rotation[1] = 180.0
     actors.append(goal_obj.pack())
 
     # add a gate at the end for decoration
@@ -80,7 +77,7 @@ def createMap(objects):
     gate_obj.bakeable = True
     pos[2] += 15.0
     gate_obj.translate = pos
-    gate_obj.rotation[1] = 135.0
+    gate_obj.rotation[1] = 180.0
     actors.append(gate_obj.pack())
 
     # the last Obj_RespawnPos in the actor list is the one that spawns the player, so move first actor to last

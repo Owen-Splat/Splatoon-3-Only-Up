@@ -1,19 +1,39 @@
 Skies:
-  - Sky_MisCrater00
-  - Sky_MisCrater01
-  - Sky_MisCrater02
-  - Sky_MisWorld
-  - Sky_MsnBrutalism00
-  - Sky_MsnBrutalism01
-  - Sky_MsnBrutalism02
-  - Sky_MsnNostalgia00
-  - Sky_MsnMegalopolis00
-  - Sky_MsnMegalopolis02
-  - Sky_MsnMegalopolis03
-  - Sky_MsnSunlight00
+  # - Sky_MisCrater00
+  # - Sky_MisCrater01
+  # - Sky_MisCrater02
+  # - Sky_MisWorld
+  # - Sky_MsnBrutalism00
+  # - Sky_MsnBrutalism01
+  # - Sky_MsnBrutalism02
+  # - Sky_MsnNostalgia00
+  # - Sky_MsnMegalopolis00
+  # - Sky_MsnMegalopolis02
+  # - Sky_MsnMegalopolis03
+  # - Sky_MsnSunlight00
   - Sky_Space02
   - Sky_Cirrus00
   - Sky_Cloudy00
+
+Colors:
+  - HeroYellow
+  - HeroGreen
+  - HeroOrange
+  - HeroBlue
+  - HeroLightBlue
+  - HeroSoda
+  - HeroBossManta
+  - HeroBossUtsuho
+  - HeroBossFuuka
+  - GreenPurple
+  - LimegreenPurple
+  - OrangeBlue
+  - OrangePurple
+  - PinkGreen
+  - TurquoisePink
+  - TurquoiseRed
+  - YellowBlue
+  - YellowPurple
 
 Basic_Objects:
   - DObj_MinigameChairBlue
@@ -22,7 +42,6 @@ Basic_Objects:
   - Lft_MsnEdge15x20x3Fence
   - DashPanel30
   - Geyser
-  - JumpPanel
   - Lft_MsnOctagonFloor60x15x60AP
   - Lft_GeneralCube15x15x15AP
   - Lft_GeneralCube30x15x15AP
@@ -56,6 +75,7 @@ Basic_Objects:
   - Lft_MsnPedestal60x20x60AP
   - Lft_MsnPedestal60x5x60AP
   - SwitchStep
-  - Sponge
-  - SpongeTall
   - Blowouts
+  # - JumpPanel - seems to have a weird position limit or something because early or far enough in, they don't spawn
+  # - Sponge
+  # - SpongeTall

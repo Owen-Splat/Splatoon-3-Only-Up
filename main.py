@@ -27,6 +27,12 @@ for level in levels:
     banc.info['GraffitiInfo']['GraffitiObjInfo'] = oead.byml.Array()
     zs_data.writer.files[file] = banc.repack()
 
+    # randomize ink color
+    file = [str(f) for f in zs_data.reader.get_files() if f.name.startswith("SceneComponent/MissionMapInfo")][0]
+    banc = BYAML(zs_data.writer.files[file])
+    color = random.choice(data['Colors'])
+    banc.info['TeamColor'] = f"Work/Gyml/{color}.game__gfx__parameter__TeamColorDataSet.gyml"
+
     # randomize skysphere for alterna levels, crater graphics go trippy
     if level.startswith("Msn_A"):
         file = [str(f) for f in zs_data.reader.get_files() if f.name.endswith("RenderingMission.bgyml")][0]
@@ -34,7 +40,12 @@ for level in levels:
         sky = random.choice(data['Skies'])
         banc.info['Lighting']['SkySphere']['ActorName'] = f"Work/Actor/{sky}.engine__actor__ActorParam.gyml"
         zs_data.writer.files[file] = banc.repack()
-
+    
+    # delete water if it exists
+    water_files = [str(f) for f in zs_data.reader.get_files() if f.name.startswith("Gyml/Msn_BrutalismWater")]
+    for file in water_files:
+        del zs_data.writer.files[file]
+    
     # final
     with open(f"output\\{level}.pack.zs", "wb") as f:
         f.write(zs_data.repack())
