@@ -1,6 +1,5 @@
+from data import *
 import oead, random, secrets
-
-from .data import OBJECT_INFO
 
 
 # extremely messy code for tweaking lots of different object distance + height
