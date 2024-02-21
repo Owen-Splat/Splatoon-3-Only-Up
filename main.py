@@ -29,18 +29,17 @@ for level in levels:
     banc.info['TeamColor'] = f"Work/Gyml/{random.choice(COLORS)}.game__gfx__parameter__TeamColorDataSet.gyml"
     zs_data.writer.files[file] = banc.repack()
 
+    # edit rendering data
+    file = [str(f) for f in zs_data.reader.get_files() if f.name.endswith("RenderingMission.bgyml")][0]
+    banc = BYAML(zs_data.writer.files[file])
+    # delete water if it exists
+    if "OceanRef" in banc.info:
+        del banc.info['OceanRef']
     # randomize skysphere for alterna levels, crater graphics go trippy
     if level.startswith("Msn_A"):
-        file = [str(f) for f in zs_data.reader.get_files() if f.name.endswith("RenderingMission.bgyml")][0]
-        banc = BYAML(zs_data.writer.files[file])
-        banc.info['Lighting']['SkySphere']['ActorName'] = f"Work/Actor/{random.choice(SKIES)}.engine__actor__ActorParam.gyml"
-        zs_data.writer.files[file] = banc.repack()
-    
-    # delete water if it exists
-    water_files = [str(f) for f in zs_data.reader.get_files() if f.name.startswith("Gyml/Msn_BrutalismWater")]
-    for file in water_files:
-        del zs_data.writer.files[file]
-    
+        banc.info['Lighting']['SkySphere']['ActorName'] = f"Work/Actor/{random.choice(SKIES)}.engine__actor__ActorParam.gyml"    
+    zs_data.writer.files[file] = banc.repack()
+
     # overwrite file with new data
     with open(f"output/{level}", "wb") as f:
         f.write(zs_data.repack())

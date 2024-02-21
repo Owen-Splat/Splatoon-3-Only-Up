@@ -1,10 +1,10 @@
 SKIES = [
   "Sky_MisWorld",
   "Sky_MisWorldLaunchPad",
-  "Sky_PlazaDay",
+  # "Sky_PlazaDay", # bottom half is a black void
   "Sky_Space02",
   "Sky_Cloudy00",
-  "Sky_Nighttime03"
+  # "Sky_Nighttime03" # made level not load?
   "Sky_Daytime00",
   "Sky_Sunset00"
 ]
@@ -47,7 +47,7 @@ ALL_OBJECTS = [
   "Lft_GeneralCube30x30x45AP",
   "Lft_GeneralCube30x45x15AP",
   "Lft_GeneralCube30x45x30AP",
-  "Lft_GeneralCube40x30x15AP",
+  # "Lft_GeneralCube40x30x15AP", # was testing on 1.0/1.1.0, but turns out this actor doesnt exist on newer versions lmao
   "Lft_GeneralCube45x15x15AP",
   "Lft_MsnCylinder15x15x15AP",
   "Lft_MsnCube20x25x20AP",
@@ -81,7 +81,7 @@ OBJECT_INFO = {
   "DashPanel30": {
     "x": -1.0,
     "y": -5.0,
-    "z": 19.45
+    "z": 18.7
   },
   "Lft_Obj_VendingMachine": {
     "x": 1.0,

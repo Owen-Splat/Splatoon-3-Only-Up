@@ -49,7 +49,7 @@ def createMap():
         actors.append(new_object.pack())
 
         # run calcs for pos/rot of next obj
-        if new_object.nextX != -1.0:
+        if new_object.nextX >= 0.0:
             hor = random.uniform(1.5, 2.5) + new_object.nextX
             if random.randint(0, 1) == 1:
                 hor = -abs(hor)
@@ -57,7 +57,7 @@ def createMap():
 
         pos[1] += new_object.nextY
 
-        if new_object.nextX != -1.0:
+        if new_object.nextX >= 0.0:
             hor = random.uniform(2.0, 3.0) + new_object.nextZ
             pos[2] += hor
         else:

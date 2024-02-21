@@ -41,35 +41,35 @@ class SplatObject:
         self.instance_id = instance_id
 
         # determine distance of next object from current object's dimensions
-        self.nextX = 0.0
-        self.nextY = 0.0
-        self.nextZ = 0.0
+        self.nextX = 0.65
+        self.nextY = -0.1
+        self.nextZ = 0.55
         if name.endswith('AP'):
             dims = name.strip('AP').split('x')
             n = len(dims)
-            self.nextX = float(dims[n-3][-2:]) / 10 / 1.5
-            self.nextY = float(dims[n-2]) / 10 / 1.5
-            self.nextZ = float(dims[n-1]) / 10 / 1.5
+            self.nextX += float(dims[n-3][-2:]) / 10 / 1.5
+            self.nextY += float(dims[n-2]) / 10 / 1.5
+            self.nextZ += float(dims[n-1]) / 10 / 1.5
         elif name.endswith('Fence'):
             dims = name.strip('Fence').split('x')
             n = len(dims)
-            self.nextX = float(dims[n-3][-2:]) / 10 / 2.0
-            self.nextY = -float(dims[n-2]) / 10 / 3.141592 # 2.0
-            self.nextZ = float(dims[n-1]) / 10 / 2.0
+            self.nextX += float(dims[n-3][-2:]) / 10 / 2.0
+            self.nextY += -float(dims[n-2]) / 10 / 3.141592 # 2.0
+            self.nextZ += float(dims[n-1]) / 10 / 2.0
         elif name == "Geyser":
-            self.nextX = 1.0
-            self.nextY = random.uniform(3.0, 12.0)
-            self.nextZ = 1.0
+            self.nextX += 1.0
+            self.nextY += random.uniform(3.0, 12.0)
+            self.nextZ += 1.0
         elif name == "Blowouts":
-            self.nextX = 1.0
-            self.nextZ = random.uniform(4.0, 12.0) + 1.0
+            self.nextX += 1.0
+            self.nextZ += random.uniform(4.0, 12.0) / 1.5
         elif name in OBJECT_INFO:
             if "x" in OBJECT_INFO[name]:
-                self.nextX = OBJECT_INFO[name]['x']
+                self.nextX += OBJECT_INFO[name]['x']
             if "y" in OBJECT_INFO[name]:
-                self.nextY = OBJECT_INFO[name]['y']
+                self.nextY += OBJECT_INFO[name]['y']
             if "z" in OBJECT_INFO[name]:
-                self.nextZ = OBJECT_INFO[name]['z']
+                self.nextZ += OBJECT_INFO[name]['z']
             if "rot" in OBJECT_INFO[name]:
                 self.rotation[1] = OBJECT_INFO[name]['rot']
             if "scale" in OBJECT_INFO[name]:
@@ -77,10 +77,6 @@ class SplatObject:
                 self.scale = [s, s, s]
             if "team" in OBJECT_INFO[name]:
                 self.team = OBJECT_INFO[name]['team']
-        else:
-            self.nextX = 0.5
-            # self.nextY = 0.1
-            self.nextZ = 0.5
     
 
     def pack(self):
@@ -97,7 +93,7 @@ class SplatObject:
         objd['Name'] = self.name
         objd['SRTHash'] = oead.U32(self.srt_hash)
         objd['Phive'] = {'Placement': {'ID': oead.U64(self.hash)}}
-        if self.rotation != [0.0, 0.0, 0.0]:
+        if self.rotation != [0.0, 0.0, 0.0]: # convert rotation to radians if the field is needed
             objd['Rotate'] = oead.byml.Array([oead.F32(r * 3.141592 / 180) for r in self.rotation])
         if self.scale != [1.0, 1.0, 1.0]:
             objd['Scale'] = oead.byml.Array([oead.F32(s) for s in self.scale])
@@ -109,6 +105,6 @@ class SplatObject:
         elif self.name == "Geyser":
             objd['spl__GeyserBancParam'] = {'MaxHeight': oead.F32(self.nextY)}
         elif self.name == "Blowouts":
-            objd['spl__BlowoutsBancParam'] = {'MaxLength': oead.F32((self.nextZ - 1.0))}
+            objd['spl__BlowoutsBancParam'] = {'MaxLength': oead.F32((self.nextZ / 1.25))}
         
         return objd
