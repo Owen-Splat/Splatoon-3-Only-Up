@@ -1,6 +1,12 @@
 SKIES = [
+  "Sky_MisWorld",
+  "Sky_MisWorldLaunchPad",
+  "Sky_PlazaDay",
   "Sky_Space02",
-  "Sky_Cloudy00"
+  "Sky_Cloudy00",
+  "Sky_Nighttime03"
+  "Sky_Daytime00",
+  "Sky_Sunset00"
 ]
 
 COLORS = [
@@ -79,7 +85,7 @@ OBJECT_INFO = {
   },
   "Lft_Obj_VendingMachine": {
     "x": 1.0,
-    "y": 2.1,
+    "y": -3.0,
     "z": 1.0,
     "rot": 180.0
   },

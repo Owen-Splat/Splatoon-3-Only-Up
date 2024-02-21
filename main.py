@@ -27,6 +27,7 @@ for level in levels:
     file = [str(f) for f in zs_data.reader.get_files() if f.name.startswith("SceneComponent/MissionMapInfo")][0]
     banc = BYAML(zs_data.writer.files[file])
     banc.info['TeamColor'] = f"Work/Gyml/{random.choice(COLORS)}.game__gfx__parameter__TeamColorDataSet.gyml"
+    zs_data.writer.files[file] = banc.repack()
 
     # randomize skysphere for alterna levels, crater graphics go trippy
     if level.startswith("Msn_A"):

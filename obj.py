@@ -48,18 +48,21 @@ class SplatObject:
             dims = name.strip('AP').split('x')
             n = len(dims)
             self.nextX = float(dims[n-3][-2:]) / 10 / 1.5
-            self.nextY = float(dims[n-2]) / 10 / 3.0
-            self.nextZ = float(dims[n-1]) / 10 / 1.2
+            self.nextY = float(dims[n-2]) / 10 / 1.5
+            self.nextZ = float(dims[n-1]) / 10 / 1.5
         elif name.endswith('Fence'):
             dims = name.strip('Fence').split('x')
             n = len(dims)
             self.nextX = float(dims[n-3][-2:]) / 10 / 2.0
-            self.nextY = float(dims[n-2]) / 10 / 2.35
+            self.nextY = -float(dims[n-2]) / 10 / 3.141592 # 2.0
             self.nextZ = float(dims[n-1]) / 10 / 2.0
         elif name == "Geyser":
+            self.nextX = 1.0
             self.nextY = random.uniform(3.0, 12.0)
+            self.nextZ = 1.0
         elif name == "Blowouts":
-            self.nextZ = random.uniform(5.0, 12.0)
+            self.nextX = 1.0
+            self.nextZ = random.uniform(4.0, 12.0) + 1.0
         elif name in OBJECT_INFO:
             if "x" in OBJECT_INFO[name]:
                 self.nextX = OBJECT_INFO[name]['x']
@@ -75,8 +78,9 @@ class SplatObject:
             if "team" in OBJECT_INFO[name]:
                 self.team = OBJECT_INFO[name]['team']
         else:
-            self.nextX = 0.2
-            self.nextZ = 0.2
+            self.nextX = 0.5
+            # self.nextY = 0.1
+            self.nextZ = 0.5
     
 
     def pack(self):
@@ -105,6 +109,6 @@ class SplatObject:
         elif self.name == "Geyser":
             objd['spl__GeyserBancParam'] = {'MaxHeight': oead.F32(self.nextY)}
         elif self.name == "Blowouts":
-            objd['spl__BlowoutsBancParam'] = {'MaxLength': oead.F32((self.nextZ - 2.0))}
+            objd['spl__BlowoutsBancParam'] = {'MaxLength': oead.F32((self.nextZ - 1.0))}
         
         return objd

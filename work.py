@@ -11,8 +11,8 @@ def createMap():
     }
     actors = []
     pos = [0.0, 30.0, -600.0]
-
-    num = 200
+    
+    num = 200 # might be able to get away with 250, but objects stop spawning too far in (at least in the z axis)
     for i in range(num):
         if i == 0:
             obj_name = "Obj_RespawnPos"
@@ -31,9 +31,11 @@ def createMap():
                 new_object.is_last = True
 
         if new_object.nextX > 0.0:
-            pos[0] += (new_object.nextX / 2)
-            pos[1] -= new_object.nextY
-            pos[2] += (new_object.nextZ / 2)
+            pos[0] += (new_object.nextX / 3.141592)
+            if new_object.nextY < 0.0:
+                pos[1] += (new_object.nextY)
+                new_object.nextY = abs(new_object.nextY)
+            pos[2] += (new_object.nextZ / 3.141592)
         
         new_object.translate = pos
 
@@ -53,11 +55,11 @@ def createMap():
                 hor = -abs(hor)
             pos[0] += hor
 
-        pos[1] += random.uniform(0.075, 0.185) + new_object.nextY
+        pos[1] += new_object.nextY
 
         if new_object.nextX != -1.0:
             hor = random.uniform(2.0, 3.0) + new_object.nextZ
-            pos[2] += abs(hor)
+            pos[2] += hor
         else:
             pos[2] += new_object.nextZ
     
@@ -66,17 +68,18 @@ def createMap():
              "SplMissionStageTreasureA", "SplMissionStageTreasureB", "SplMissionStageTreasureC"]
     goal_name = random.choice(goals)
     goal_obj = SplatObject(goal_name, ids)
-    if goal_name.startswith("Spl"):
-        pos[1] += 2.0
-    pos[2] += 5.0
     goal_obj.translate = pos
-    goal_obj.rotation[1] = 180.0
+    if goal_name.startswith("Spl"):
+        goal_obj.translate[1] += 2.0
+    else:
+        goal_obj.rotation[1] = 180.0
+    goal_obj.translate[2] += 5.0
     actors.append(goal_obj.pack())
 
     # add a gate at the end for decoration
     gate_obj = SplatObject("Lft_MsnGoalGateNP", ids)
     gate_obj.bakeable = True
-    pos[2] += 15.0
+    pos[2] += 20.0
     gate_obj.translate = pos
     gate_obj.rotation[1] = 180.0
     actors.append(gate_obj.pack())
