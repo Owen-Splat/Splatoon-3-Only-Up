@@ -42,7 +42,7 @@ class SplatObject:
 
         # determine distance of next object from current object's dimensions
         self.nextX = 0.65
-        self.nextY = -0.1
+        self.nextY = -0.125
         self.nextZ = 0.55
         if name.endswith('AP'):
             dims = name.strip('AP').split('x')
